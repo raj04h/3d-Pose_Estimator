@@ -1,19 +1,19 @@
 import torch
 import torch.nn as nn
 from torch.utils.data import DataLoader
+from tqdm import tqdm
+import matplotlib.pyplot as plt
 
 from dataset_loader import satellitePose
 from pose_model import poseNet
 
 
 json_path = r"D:\Data centr\IMG_data\satellite_pose\speed\train.json"
-
 image_path = r"D:\Data centr\IMG_data\satellite_pose\speed\images\train"
 
 
 # create dataset
 dataset = satellitePose(json_path, image_path)
-
 
 # create dataloader
 loader = DataLoader(
@@ -25,9 +25,7 @@ loader = DataLoader(
 
 trained_model = poseNet()
 
-
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-
 model = trained_model.to(device)
 
 
@@ -56,39 +54,60 @@ def pose_loss(pred, gt):
     return loss.mean()
 
 
+# store loss for visualization
+epoch_losses = []
+
+
 # training loop
 for epoch in range(epochs):
 
+    model.train()
+
     total_loss = 0
 
-    for images, poses in loader:
+    print(f"\nEpoch {epoch+1}/{epochs}")
 
-        # move data to device
+    progress_bar = tqdm(loader)
+
+    for images, poses in progress_bar:
+
         images = images.to(device)
         poses = poses.to(device)
 
-        # forward pass
         preds = model(images)
 
-        # compute loss
         loss = pose_loss(preds, poses)
 
-        # reset gradients
         optimizer.zero_grad()
 
-        # backpropagation
         loss.backward()
 
-        # update weights
         optimizer.step()
 
         total_loss += loss.item()
 
+        # update progress bar text
+        progress_bar.set_description(f"Loss: {loss.item():.4f}")
+
+
     avg_loss = total_loss / len(loader)
 
-    print(f"Epoch {epoch+1}/{epochs} Loss: {avg_loss:.4f}")
+    epoch_losses.append(avg_loss)
+
+    print(f"Epoch {epoch+1}/{epochs} Average Loss: {avg_loss:.4f}")
 
 
+# save model
 torch.save(model.state_dict(), "SAT_Pose_model.pth")
 
-print("Model saved")
+print("\nModel saved successfully")
+
+
+# plot training curve
+plt.figure(figsize=(8,5))
+plt.plot(epoch_losses, marker='o')
+plt.title("Training Loss Curve")
+plt.xlabel("Epoch")
+plt.ylabel("Loss")
+plt.grid(True)
+plt.show()
