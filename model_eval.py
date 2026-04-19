@@ -94,7 +94,7 @@ plt.xlabel("Rotation Error (radians)")
 plt.ylabel("Frequency")
 
 plt.grid(True)
-plt.savefig("rotation_error.jpg")
+plt.savefig(r"Evaluation_Graph\rotation_error.jpg")
 plt.close()
 
 # plot translation error histogram
@@ -106,7 +106,7 @@ plt.xlabel("Translation Error (meters)")
 plt.ylabel("Frequency")
 
 plt.grid(True)
-plt.savefig("translation_error.jpg")
+plt.savefig(r"Evaluation_Graph\translation_error.jpg")
 plt.close()
 
 # plot rotation vs translation error
@@ -118,7 +118,7 @@ plt.xlabel("Rotation Error")
 plt.ylabel("Translation Error")
 
 plt.grid(True)
-plt.savefig("pose_error_scatter.jpg")
+plt.savefig(r"Evaluation_Graph\pose_error_scatter.jpg")
 plt.close()
 
 
@@ -131,7 +131,7 @@ plt.ylabel("Predicted Distance (Z)")
 
 plt.title("Predicted vs Ground Truth Distance")
 plt.grid(True)
-plt.savefig("distance_comparison.jpg")
+plt.savefig(r"Evaluation_Graph\distance_comparison.jpg")
 plt.close()
 
 print("\nEvaluation graphs plotted successfully")
