@@ -26,8 +26,10 @@ image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
 image = cv2.resize(image,(224,224))
 image = image/255.0
 
+
 img_tensor = torch.tensor(image).permute(2,0,1).float()
 img_tensor = img_tensor.unsqueeze(0).to(device)
+
 
 # INFERENCE
 with torch.no_grad():

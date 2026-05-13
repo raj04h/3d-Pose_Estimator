@@ -90,8 +90,10 @@ plt.figure(figsize=(8,6))
 plt.hist(rotation_errors, bins=40, color="blue")
 plt.title("Rotation Error Distribution")
 
+
 plt.xlabel("Rotation Error (radians)")
 plt.ylabel("Frequency")
+
 
 plt.grid(True)
 plt.savefig(r"Evaluation_Graph\rotation_error.jpg")
@@ -114,6 +116,7 @@ plt.figure(figsize=(8,6))
 plt.scatter(rotation_errors, translation_errors)
 plt.title("Rotation vs Translation Error")
 
+
 plt.xlabel("Rotation Error")
 plt.ylabel("Translation Error")
 
@@ -125,6 +128,7 @@ plt.close()
 # predicted vs ground truth positions
 plt.figure(figsize=(8,6))
 plt.scatter(gt_positions[:,2], pred_positions[:,2])
+
 
 plt.xlabel("Ground Truth Distance (Z)")
 plt.ylabel("Predicted Distance (Z)")

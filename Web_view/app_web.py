@@ -12,17 +12,14 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 from model_arch import poseNet
 
 
-# --------------------------------------------------
 # PAGE CONFIG
-# --------------------------------------------------
-
 st.set_page_config(
     page_title="Satellite Pose Estimation",
-    page_icon="🛰",
+    page_icon=" ",
     layout="wide"
 )
 
-st.title("🛰 Satellite Pose Estimation Dashboard")
+st.title("Satellite Pose Estimation Dashboard")
 
 st.markdown(
 """
@@ -32,10 +29,7 @@ Upload a **satellite image** and the AI model will estimate its **6DoF pose**
 )
 
 
-# --------------------------------------------------
 # LOAD MODEL
-# --------------------------------------------------
-
 @st.cache_resource
 def load_model():
 
@@ -58,10 +52,8 @@ def load_model():
 model = load_model()
 
 
-# --------------------------------------------------
-# UTILITY FUNCTIONS
-# --------------------------------------------------
 
+# UTILITY FUNCTIONS
 def quaternion_to_rotation(q):
 
     qw, qx, qy, qz = q
@@ -186,10 +178,7 @@ def create_satellite_plot(R, t):
     return fig
 
 
-# --------------------------------------------------
 # IMAGE UPLOAD
-# --------------------------------------------------
-
 uploaded_file = st.file_uploader(
     "Upload Satellite Image",
     type=["jpg","jpeg","png"]
