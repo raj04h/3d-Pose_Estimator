@@ -9,7 +9,7 @@ import os
 # allow importing model from parent folder
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
-from model_arch import poseNet
+from app.model_arch import poseNet
 
 
 # PAGE CONFIG

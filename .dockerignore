@@ -1,0 +1,15 @@
+__pycache__/
+*.pyc
+
+.git
+.gitignore
+
+.vscode
+
+Evaluation_Graph/
+Test_Sample/
+
+.env
+
+venv/
+env/
