@@ -73,6 +73,11 @@ Interactive Pose Viewer
 
 * Plotly
 
+* Dockerized
+
+* CI/CD Pipelines
+
+
 # Dataset
 
 The project uses the SPEED (Satellite Pose Estimation Dataset).
